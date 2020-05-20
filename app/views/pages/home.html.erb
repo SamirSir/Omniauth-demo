@@ -1,0 +1,22 @@
+<h1>Home Page</h1>
+<hr>
+
+<% if current_user %>
+	
+	<% if current_user.image != nil %>
+		<%= current_user.name %><br>
+		<%= image_tag(current_user.image) %><br>
+		<%= current_user.inspect %>
+	<% else %>
+		<%= current_user.username %><br>
+	<% end %>
+<% end %>
+
+<% unless current_user %>
+	<%= link_to "Sign Up", new_user_registration_path %><br>
+	<%= link_to "Sign In", new_user_session_path %><br>
+	
+	<%= link_to "sign in with facebook", user_facebook_omniauth_authorize_path %>
+<% else %>
+	<%= link_to "Log Out", destroy_user_session_path, method: :delete %>
+<% end%>
